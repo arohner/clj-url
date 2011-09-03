@@ -14,7 +14,7 @@
                   (update-in [:url] (constantly (or rest ""))))
               state))]
     (-> {:m {} :url u}
-        (parse-step #"^([^:/]+)://(.*)" :protocol)
+        (parse-step #"^([^/]+)://(.*)" :protocol)
         (parse-step #"^([^/:]+)(.*)" :host)
         (parse-step #"^:(\d+)(.*)" :port)
         (parse-step #"^(/[^?]+)(\?.*)?" :path)

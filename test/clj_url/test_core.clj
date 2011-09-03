@@ -12,7 +12,7 @@
        "/jira/secure/Dashboard.jspa" {:path "/jira/secure/Dashboard.jspa"}
        "/jira/secure/Dashboard.jspa?id=5" {:path "/jira/secure/Dashboard.jspa" :query "id=5"}
        "/foo?id={0}" {:path "/foo" :query "id={0}"} ;; parsing doesn't escape
-       ))
+       "jdbc:postgresql://localhost:5432/shouter" {:path "/shouter", :port "5432", :host "localhost", :protocol "jdbc:postgresql"}))
 
 (deftest valid-hostnames
   (are [u] (= true (url/valid? u))
