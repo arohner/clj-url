@@ -12,7 +12,12 @@
        "/jira/secure/Dashboard.jspa" {:path "/jira/secure/Dashboard.jspa"}
        "/jira/secure/Dashboard.jspa?id=5" {:path "/jira/secure/Dashboard.jspa" :query "id=5"}
        "/foo?id={0}" {:path "/foo" :query "id={0}"} ;; parsing doesn't escape
-       "jdbc:postgresql://localhost:5432/shouter" {:path "/shouter", :port "5432", :host "localhost", :protocol "jdbc:postgresql"}))
+       "jdbc:postgresql://localhost:5432/shouter" {:path "/shouter", :port "5432", :host "localhost", :protocol "jdbc:postgresql"}
+       "postgres://dmwckvmsqb:P3tXDq21tMLFSKn9MMqQ@ec2-117-20-227-173.compute-1.amazonaws.com/dmrckvmsqg" {:protocol "postgres"
+                                                                                                           :username "dmwckvmsqb"
+                                                                                                           :password "P3tXDq21tMLFSKn9MMqQ"
+                                                                                                           :host "ec2-117-20-227-173.compute-1.amazonaws.com"
+                                                                                                           :path "/dmrckvmsqg"}))
 
 (deftest valid-hostnames
   (are [u] (= true (url/valid? u))

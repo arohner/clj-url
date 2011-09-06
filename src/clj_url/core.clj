@@ -15,6 +15,8 @@
               state))]
     (-> {:m {} :url u}
         (parse-step #"^([^/]+)://(.*)" :protocol)
+        (parse-step #"^([^:]+)(:.*@.*)" :username)
+        (parse-step #"^:([^@]+)@(.*)" :password)
         (parse-step #"^([^/:]+)(.*)" :host)
         (parse-step #"^:(\d+)(.*)" :port)
         (parse-step #"^(/[^?]+)(\?.*)?" :path)
@@ -26,11 +28,11 @@
       (.codePointAt 0)
       (Integer/toString 16)))
 
-(defn valid-label [label]
+(defn valid-label? [label]
   (re-find #"^\p{Alnum}[-\p{Alnum}]*\p{Alnum}$" label))
 
 (defn valid-host? [host]
-  (every? valid-label (str/split host #"\.")))
+  (every? valid-label? (str/split host #"\.")))
 
 (defn valid-ip-addr? [host]
   (let [labels (str/split host #"\.")]
@@ -51,7 +53,7 @@
   (assert (map? m))
   (some (fn [[part v]]
           (when v
-            (when-not ((-> validation-fns part) v)
+            (when-not (and (-> validation-fns part) ((-> validation-fns part) v))
               (format "%s '%s' is invalid" (name part) v)))) m))
 
 (defn valid-map? [m]
