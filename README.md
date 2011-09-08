@@ -1,6 +1,6 @@
 Installing
 ==========
-[clj-url "1.0.0"]
+[clj-url "1.0.2"]
 
 Usage
 =====
